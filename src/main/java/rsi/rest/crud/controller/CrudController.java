@@ -4,49 +4,48 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rsi.rest.crud.repository.ScrollRepository;
-import rsi.rest.crud.to.Scroll;
+import rsi.rest.crud.repository.StudentRepository;
+import rsi.rest.crud.dto.Student;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("rsi/scrolls")
 @RestController
 public class CrudController {
 
-    private final ScrollRepository scrollRepository;
-
-    @GetMapping
-    public List<Scroll> getAllScrolls() {
-        return scrollRepository.getAll();
-    }
-
-    @GetMapping(path = "/{scrollId}")
-    public Scroll getScrollById(@PathVariable Long scrollId) {
-        return scrollRepository.get(scrollId);
-    }
+    private final StudentRepository studentRepository;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Scroll saveScroll(@RequestBody Scroll scroll) {
-        return scrollRepository.save(scroll);
+    public Student saveStudent(@RequestBody Student student) {
+        return studentRepository.save(student);
     }
 
-    @DeleteMapping(path = "/{scrollId}")
-    public ResponseEntity deleteScroll(@PathVariable Long scrollId) {
-        if (!scrollRepository.contains(scrollId)) {
-            return new ResponseEntity(HttpStatus.NOT_MODIFIED);
-        }
-        scrollRepository.delete(scrollId);
-        return new ResponseEntity(HttpStatus.OK);
+    @GetMapping
+    public List<Student> getAllStudents() {
+        return studentRepository.getAll();
+    }
+
+    @GetMapping(path = "/{studentId}")
+    public Student getStudentById(@PathVariable Long studentId) {
+        return studentRepository.get(studentId);
     }
 
     @PutMapping
-    public ResponseEntity updateScroll(@RequestBody Scroll scroll) {
-        if (!scrollRepository.contains(scroll.getId())) {
+    public ResponseEntity updateStudent(@RequestBody Student student) {
+        if (!studentRepository.contains(student.getId())) {
             return new ResponseEntity(HttpStatus.NOT_MODIFIED);
         }
-        scrollRepository.update(scroll);
+        studentRepository.update(student);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/{studentId}")
+    public ResponseEntity deleteStudent(@PathVariable Long studentId) {
+        if (!studentRepository.contains(studentId)) {
+            return new ResponseEntity(HttpStatus.NOT_MODIFIED);
+        }
+        studentRepository.delete(studentId);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

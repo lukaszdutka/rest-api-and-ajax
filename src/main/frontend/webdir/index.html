@@ -1,0 +1,35 @@
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel = "stylesheet" type = "text/css" href = "style.css" />
+    <script type="text/javascript" src="scripts.js"></script>
+
+</head>
+
+<body>
+
+<div class="form">
+    <label for="firstName">Imię: </label>
+    <input type="text" id="firstName">
+    <label for="lastName">Nazwisko: </label>
+    <input type="text" id="lastName">
+    <br>
+    <button id="addStudent" onclick="postDataAndAddRow()">dodaj</button>
+
+    <br>
+    <button id="updateStudent" onclick="updateStudent()">aktualizuj</button>
+    <button id="deleteStudent" onclick="deleteStudent()">usuń</button>
+    <label for="id"></label><input type="number" id="id">
+    
+    <br>
+    <button id="showStudents" onclick="showStudents()">wyświetl listę</button>
+    <br>
+</div>
+
+<table id="table"></table>
+    
+</body>
+    <script>
+    showStudents();
+    </script>
+</html>

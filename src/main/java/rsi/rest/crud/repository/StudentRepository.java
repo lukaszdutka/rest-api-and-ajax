@@ -1,5 +1,6 @@
 package rsi.rest.crud.repository;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Repository;
 import rsi.rest.crud.dto.Student;
 
@@ -16,17 +17,27 @@ public class StudentRepository {
     private Map<Long, Student> students = new HashMap<>();
 
     public Student save(Student student) {
-        student.setId(nextId++);
-        students.put(student.getId(), student);
-        return student;
+        if(Strings.isNotBlank(student.getFirstName()) && Strings.isNotBlank(student.getLastName())){
+            student.setId(nextId++);
+            students.put(student.getId(), student);
+            return student;
+        }
+        return null;
     }
 
     public void delete(Long id) {
         students.remove(id);
     }
 
-    public void update(Student student) {
-        students.put(student.getId(), student);
+    public void update(Student dataToUpdate) {
+        Student studentDB = students.get(dataToUpdate.getId());
+        if(Strings.isNotBlank(dataToUpdate.getFirstName())){
+            studentDB.setFirstName(dataToUpdate.getFirstName());
+        }
+        if(Strings.isNotBlank(dataToUpdate.getLastName())){
+            studentDB.setLastName(dataToUpdate.getLastName());
+        }
+        students.put(dataToUpdate.getId(), studentDB);
     }
 
     public boolean contains(Long id) {

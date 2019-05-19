@@ -1,4 +1,4 @@
-w folderze: rsi/src/main/
+w folderze: src/main/
     znajdują się pliki związane zarówno z frontendem i backendem aplikacji.
 
     Jest to uproszczenie, ponieważ folder 'frontend' jest uruchamiany na
